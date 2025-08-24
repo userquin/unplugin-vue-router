@@ -171,7 +171,9 @@ definePage({
 
     // Should return empty object instead of throwing
     expect(result).toBe('export default {}')
-    expect('`definePage()` in <script setup> cannot reference locally declared variables').toHaveBeenWarned()
+    expect(
+      '`definePage()` in <script setup> cannot reference locally declared variables'
+    ).toHaveBeenWarned()
   })
 
   it('extracts name and path', async () => {
