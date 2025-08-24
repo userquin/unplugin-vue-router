@@ -35,7 +35,7 @@ function getCodeAst(code: string, id: string) {
   let offset = 0
   let ast: Program | undefined
   const lang = getLang(id.split(MACRO_DEFINE_PAGE_QUERY)[0]!)
-  
+
   try {
     if (lang === 'vue') {
       const sfc = parseSFC(code, id)
@@ -109,7 +109,9 @@ export function definePageTransform({
       const routeRecord = definePageNode.arguments[0]
 
       if (!routeRecord) {
-        warn(`[${id}]: definePage() expects an object expression as its only argument`)
+        warn(
+          `[${id}]: definePage() expects an object expression as its only argument`
+        )
         return 'export default {}'
       }
 
@@ -117,9 +119,15 @@ export function definePageTransform({
 
       // this will throw if a property from the script setup is used in definePage
       try {
-        checkInvalidScopeReference(routeRecord, MACRO_DEFINE_PAGE, scriptBindings)
+        checkInvalidScopeReference(
+          routeRecord,
+          MACRO_DEFINE_PAGE,
+          scriptBindings
+        )
       } catch (error) {
-        warn(`[${id}]: ${error instanceof Error ? error.message : 'Invalid scope reference in definePage'}`)
+        warn(
+          `[${id}]: ${error instanceof Error ? error.message : 'Invalid scope reference in definePage'}`
+        )
         return 'export default {}'
       }
 
@@ -199,7 +207,9 @@ export function definePageTransform({
     }
   } catch (error) {
     // Handle any syntax errors or parsing errors gracefully
-    warn(`[${id}]: Failed to process definePage: ${error instanceof Error ? error.message : 'Unknown error'}`)
+    warn(
+      `[${id}]: Failed to process definePage: ${error instanceof Error ? error.message : 'Unknown error'}`
+    )
     return isExtractingDefinePage ? 'export default {}' : undefined
   }
 }
@@ -225,12 +235,16 @@ export function extractDefinePageNameAndPath(
 
     const routeRecord = definePageNode.arguments[0]
     if (!routeRecord) {
-      warn(`[${id}]: definePage() expects an object expression as its only argument`)
+      warn(
+        `[${id}]: definePage() expects an object expression as its only argument`
+      )
       return
     }
 
     if (routeRecord.type !== 'ObjectExpression') {
-      warn(`[${id}]: definePage() expects an object expression as its only argument`)
+      warn(
+        `[${id}]: definePage() expects an object expression as its only argument`
+      )
       return
     }
 
@@ -263,7 +277,9 @@ export function extractDefinePageNameAndPath(
     return routeInfo
   } catch (error) {
     // Handle any syntax errors or parsing errors gracefully
-    warn(`[${id}]: Failed to extract definePage info: ${error instanceof Error ? error.message : 'Unknown error'}`)
+    warn(
+      `[${id}]: Failed to extract definePage info: ${error instanceof Error ? error.message : 'Unknown error'}`
+    )
     return
   }
 }

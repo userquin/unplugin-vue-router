@@ -269,7 +269,7 @@ definePage({
   <div>hello</div>
 </template>
       `
-      
+
       const result = await definePageTransform({
         code: codeWithSyntaxError,
         id: 'src/pages/broken.vue?definePage&vue',
@@ -294,7 +294,7 @@ const b = 1
   <div>hello</div>
 </template>
       `
-      
+
       const result = await definePageTransform({
         code: codeWithSyntaxError,
         id: 'src/pages/broken.vue',
@@ -313,7 +313,7 @@ definePage({
 })
 </script>
       `
-      
+
       const result = await definePageTransform({
         code: codeWithMalformedObject,
         id: 'src/pages/malformed.vue?definePage&vue',
@@ -332,7 +332,7 @@ definePage({
 })
 </script>
       `
-      
+
       const result = await definePageTransform({
         code: codeWithInvalidSyntax,
         id: 'src/pages/invalid.vue?definePage&vue',
@@ -350,7 +350,7 @@ definePage({
 })
 </script>
       `
-      
+
       const result = await extractDefinePageNameAndPath(
         codeWithSyntaxError,
         'src/pages/broken.vue'
@@ -369,7 +369,7 @@ definePage({
   // missing closing bracket
 </script>
       `
-      
+
       const result = await definePageTransform({
         code: codeWithUnclosedBracket,
         id: 'src/pages/unclosed.vue?definePage&vue',
